@@ -1,0 +1,30 @@
+{% extends 'webapp/base.html' %} {% block content %}
+
+<center>
+  <div
+    style="
+      color: snow;
+      background-color: rgba(11, 11, 11, 0.7);
+      padding: 20px;
+      width: 60%;
+      border-radius: 20px;
+      margin: 10px auto;
+    "
+  >
+    {%if user.is_authenticated and user.is_superuser %}
+    <h1>Add Course</h1>
+    <br />
+    <div class="container">
+      {% if submitted %} Course Added Succesfully {% else %}
+
+      <form action="" method="POST">
+        {% csrf_token %} {{ form.as_p }}
+        <br />
+        <input type="submit" value="Submit" class="btn btn-outline-light" />
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</center>
+
+{% endif %} {% endblock content %}

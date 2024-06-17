@@ -1,0 +1,28 @@
+{% extends 'webapp/base.html' %} {% block content %}
+
+<center>
+  <div class="container">
+    <h1>Your Search</h1>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+      "
+    >
+      {% if searched %}
+      <br /><br />
+      {% for course in courses %}
+      <h3>
+        <a style="color: antiquewhite" href="{% url 'coursesPage' %}"
+          >{{course}}</a
+        >
+      </h3>
+      <br />
+      {% endfor%} {% else %}
+      <h2>Please Type Something to Search</h2>
+      {% endif %} {% endblock content %}
+    </div>
+  </div>
+</center>

@@ -1,0 +1,51 @@
+{% extends 'webapp/base.html' %} {% block content %}
+
+<div
+  style="
+    height: 55vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+    margin-top: 6%;
+  "
+>
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+      height: 100%;
+      background-color: rgba(249, 241, 241, 0.7);
+      padding: 20px;
+      border-radius: 20px;
+    "
+  >
+    <h1 class="text-center">Login Page</h1>
+    <br /><br />
+    <form action="" method="POST">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          aria-describedby="emailHelp"
+          name="username"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" />
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

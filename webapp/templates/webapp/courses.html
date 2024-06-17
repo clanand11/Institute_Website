@@ -1,0 +1,143 @@
+{% extends 'webapp/base.html' %} {% block content %}
+
+<div class="container">
+  <h1 class="text-center">Courses Offered Here !!!</h1>
+  {% if user.is_authenticated and user.is_superuser %}
+  <br />
+  {% for course in courseList %}
+
+  <div class="card" style="margin: 50px">
+    <div
+      class="card-header"
+      id="appear"
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      {{course}}
+      <div>
+        <a
+          href="{% url 'viewstudentsPage' course.id %}"
+          class="btn btn-outline-secondary"
+          >View Students</a
+        >
+        <a
+          href="{% url 'updatecoursePage' course.id %}"
+          class="btn btn-outline-secondary"
+          >Update</a
+        >
+        <a
+          href="{% url 'deletecoursePage' course.id %}"
+          class="btn btn-outline-danger del-course"
+          id="delcourse"
+          >Delete</a
+        >
+      </div>
+    </div>
+
+    <div class="card-body" id="cont">
+      <p class="card-text">{{course.description}}</p>
+    </div>
+  </div>
+
+  {% endfor %} {% elif user.is_authenticated %} {% for course in courseList %}
+
+  <div class="card" style="margin: 50px">
+    <div
+      class="card-header"
+      id="appear"
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      {{course}}
+      <div style="display: flex; justify-content: center; align-items: center">
+        {% if course not in request.user.courses.all %}
+        <a
+          href="{% url 'registercoursePage' course.id %}"
+          class="btn btn-outline-secondary"
+          >Register</a
+        >
+        {% else %}
+        <p>Registered</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card-body" id="cont">
+      <p class="card-text">{{course.description}}</p>
+    </div>
+  </div>
+
+  {% endfor %} {% else %} {% for course in courseList %}
+
+  <div class="card" style="margin: 50px">
+    <div
+      class="card-header"
+      id="appear"
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      {{course}}
+    </div>
+
+    <div class="card-body" id="cont">
+      <p class="card-text">{{course.description}}</p>
+    </div>
+  </div>
+
+  {% endfor %} {% endif %}
+
+  <!-- {% for course in courseList %}
+
+  <div class="card" style="margin: 50px">
+    <div
+      class="card-header"
+      id="appear"
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      {{course}} {% if user.is_authenticated and user.is_superuser %}
+      <div>
+        <a
+          href="{% url 'viewstudentsPage' course.id %}"
+          class="btn btn-outline-secondary"
+          >View Students</a
+        >
+        <a
+          href="{% url 'updatecoursePage' course.id %}"
+          class="btn btn-outline-secondary"
+          >Update</a
+        >
+        <a
+          href="{% url 'deletecoursePage' course.id %}"
+          class="btn btn-outline-danger del-course"
+          id="delcourse"
+          >Delete</a
+        >
+      </div>
+      {% endif %} {% if user.is_authenticated and not user.is_superuser %}
+      <div>
+        <a
+          href="{% url 'registercoursePage' course.id %}"
+          class="btn btn-outline-secondary"
+          >Register</a
+        >
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="card-body" id="cont">
+      <p class="card-text">{{course.description}}</p>
+    </div>
+  </div>
+
+  {% endfor %} -->
+</div>
+
+<script>
+  var deleteButtons = document.getElementsByClassName("del-course");
+  for (var i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener("click", function (event) {
+      if (!confirm("Are you sure you want to proceed?")) {
+        event.preventDefault();
+      }
+    });
+  }
+</script>
+
+{% endblock content %}

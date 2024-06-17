@@ -1,0 +1,19 @@
+{% extends 'webapp/base.html' %} {% block content %}
+
+<center>
+  {% if user.is_authenticated %}
+  <h1>Reg Page</h1>
+  <br /><br /><br />
+  <div class="container">
+    {% if submitted %} Submitted Succesfully {% else %}
+
+    <form action="" method="POST">
+      {% csrf_token %} {{ form.as_p }}
+      <input type="submit" value="Submit" class="btn btn-primary" />
+    </form>
+    {% endif %}
+  </div>
+  {% endif %}
+</center>
+
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'webapp/base.html' %} {% block content %}
+
+<div class="container">
+  <h1 class="text-center">All Users</h1>
+  {% for user in users %} {% if not user.is_superuser %}
+
+  <div class="card w-75" style="margin: 20px auto">
+    <div class="card-body">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+        <!-- <p class="card-text">Email : {{user.email}}</p> -->
+        <a
+          href="{% url 'deleteuserPage' user.id %}"
+          class="btn btn-outline-danger del-user"
+          >Delete</a
+        >
+      </div>
+
+      <!-- <div>
+        <p class="card-text">Courses Enrolled :</p>
+        <ul>
+          {% for course in user.courses.all %}
+          <li>{{ course.name }}</li>
+          {% endfor %}
+        </ul>
+      </div> -->
+    </div>
+  </div>
+
+  {% endif %} {% endfor %}
+</div>
+
+<script>
+  var deletebuttons = document.getElementsByClassName("del-user");
+  for (var i = 0; i < deletebuttons.length; i++) {
+    deletebuttons[i].addEventListener("click", function (event) {
+      if (!confirm("Are you sure you want to delete this user?")) {
+        event.preventDefault();
+      }
+    });
+  }
+</script>
+
+{% endblock content %}

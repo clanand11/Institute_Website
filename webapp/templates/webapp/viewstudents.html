@@ -1,0 +1,38 @@
+{% extends 'webapp/base.html' %} {% block content %}
+
+<center>
+  {% if user.is_authenticated and user.is_superuser %}
+  <h1>Students Enrolled for {{course}}</h1>
+  <br /><br /><br />
+
+  <div class="container">
+    {% if students %}
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Phone No</th>
+          <th scope="col">Email ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for std in students %}
+        <tr>
+          <td>{{std.first_name}}</td>
+          <td>{{std.last_name}}</td>
+          <td>{{std.phone_num}}</td>
+          <td>{{std.email}}</td>
+        </tr>
+        {%endfor %}
+      </tbody>
+    </table>
+
+    {% else %}
+    <h2>No Students Enrolled</h2>
+    {% endif %}
+  </div>
+  {% endif %}
+</center>
+
+{% endblock content %}
